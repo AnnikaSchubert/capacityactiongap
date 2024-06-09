@@ -1550,9 +1550,9 @@
     },
     "marginaleffects": {
       "Package": "marginaleffects",
-      "Version": "0.17.0",
+      "Version": "0.20.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "Rcpp",
@@ -1562,9 +1562,10 @@
         "generics",
         "insight",
         "methods",
-        "rlang"
+        "rlang",
+        "utils"
       ],
-      "Hash": "8afe5c5de05ab33886b90c23c5ff62c2"
+      "Hash": "1f951f3823c8e7e8b21fc2f6636e30a9"
     },
     "memoise": {
       "Package": "memoise",
