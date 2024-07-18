@@ -90,11 +90,11 @@ options(scipen=999)
 options(digits = 4)
 
 
-# 7.2 Log Reg: ACs --> Adaptation action yes/no ---------------------------
+# 5.2 Log Reg: ACs --> Adaptation action yes/no ---------------------------
 
 # binary outcome --> binary logistic regression
 
-# 7.2.1 Logistic Reg with cluster-robust SEs - full sample ---------------------------
+# 5.2.1 Logistic Reg with cluster-robust SEs - full sample ---------------------------
 
 # fit logistic regression to each imputed data set 
 glm_multiimp <- with(KARE_MI,
@@ -113,7 +113,7 @@ glm_multiimp <- with(KARE_MI,
 marginal <- avg_slopes(glm_multiimp, vcov = ~town)
 
 # save results
-marginal$order <- c(33, 32, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
+marginal$order <- c(32, 33, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
                     23, 22, 24, 19, 30, 29, 5, 31, 4, 17, 18, 20, 11,
                     9, 10, 6, 8, 7, 25, 26, 27)
 marginal <- marginal[order(marginal$order, decreasing = F),]
@@ -199,7 +199,7 @@ car::vif(glm_multiimp$analyses[[10]])
 # --> all relevant CVs are included in the model
 
 
-# 7.2.2 Logistic Reg with cluster-robust SEs - Owners ---------------------------
+# 5.2.2 Logistic Reg with cluster-robust SEs - Owners ---------------------------
 
 # fit logistic regression to each imputed data set 
 glm_multiimp_own <- with(KARE_MI,
@@ -219,7 +219,7 @@ glm_multiimp_own <- with(KARE_MI,
 marginal_own <- avg_slopes(glm_multiimp_own, vcov = ~town)
 
 # save results
-marginal_own$order <- c(33, 32, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
+marginal_own$order <- c(32, 33, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
                         23, 22, 24, 19, 30, 29, 31, 4, 18, 20, 11,
                         9, 10, 6, 8, 7, 25, 26, 27)
 marginal_own <- marginal_own[order(marginal_own$order, decreasing = F),]
@@ -246,7 +246,7 @@ for (i in 1:30) {
 median(BIC_log_own)
 
 
-# 7.2.3 Logistic Reg with cluster-robust SEs - Tenants ---------------------------
+# 5.2.3 Logistic Reg with cluster-robust SEs - Tenants ---------------------------
 
 # fit logistic regression to each imputed data set 
 glm_multiimp_ten <- with(KARE_MI,
@@ -266,7 +266,7 @@ glm_multiimp_ten <- with(KARE_MI,
 marginal_ten <- avg_slopes(glm_multiimp_ten, vcov = ~town)
 
 # save results
-marginal_ten$order <- c(33, 32, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
+marginal_ten$order <- c(32, 33, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
                         23, 22, 24, 19, 30, 29, 31, 4, 17, 18, 20, 11,
                         9, 10, 6, 8, 7, 25, 26, 27)
 marginal_ten <- marginal_ten[order(marginal_ten$order, decreasing = F),]
@@ -293,7 +293,7 @@ for (i in 1:30) {
 median(BIC_log_ten)
 
 
-# 7.2.4 Create table (App. A2) ---------------------------
+# 5.2.4 Create table (App. A2) ---------------------------
  
 stargazer(log_model, log_model_own, log_model_ten,                # use complete case models as model objects as list objects are not supported
           coef = list(b_log_AME, b_log_AME_own, b_log_AME_ten),   # but display coefficients etc. from imputed models 
@@ -306,7 +306,7 @@ stargazer(log_model, log_model_own, log_model_ten,                # use complete
           out = here::here("./output/LogReg_inck.doc"))
 
 
-# 7.2.5 Create forest plot (Fig.6) ---------------------------
+# 5.2.5 Create forest plot (Fig.6) ---------------------------
 
 # label variables
 marginal_own <- marginal_own %>%
@@ -400,7 +400,7 @@ ggsave(filename = here::here("./output/logplot.svg"))
 
 
 
-# 7.3 Poisson Reg: ACs --> Adaptation Action No. ---------------------------
+# 5.3 Poisson Reg: ACs --> Adaptation Action No. ---------------------------
 
 # count data --> poisson regression
 
@@ -408,7 +408,7 @@ ggsave(filename = here::here("./output/logplot.svg"))
 # results were similar with heteroskedasticity-robust standard errors 
 
 
-# 7.3.1 Poisson Reg. with cluster-robust SEs - full sample ---------------------------
+# 5.3.1 Poisson Reg. with cluster-robust SEs - full sample ---------------------------
 
 # Fit poisson regression to each imputed data set 
 pois_multiimp <- with(KARE_MI, 
@@ -428,7 +428,7 @@ pois_multiimp <- with(KARE_MI,
 marginal_pois <- avg_slopes(pois_multiimp, vcov = ~town)
 
 # save results
-marginal_pois$order <- c(33, 32, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
+marginal_pois$order <- c(32, 33, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
                          23, 22, 24, 19, 30, 29, 5, 31, 4, 17, 18, 20, 11,
                          9, 10, 6, 8, 7, 25, 26, 27)
 marginal_pois <- marginal_pois[order(marginal_pois$order, decreasing = F),]
@@ -479,7 +479,7 @@ for (i in 1:30) {
 median(BIC_pois_all)
 
 
-# 7.3.2 Poisson Reg. with cluster-robust SEs - Owners ---------------------------
+# 5.3.2 Poisson Reg. with cluster-robust SEs - Owners ---------------------------
 
 # Fit poisson regression to each imputed data set 
 pois_multiimp_own <- with(KARE_MI, 
@@ -499,7 +499,7 @@ pois_multiimp_own <- with(KARE_MI,
 marginal_pois_own <- avg_slopes(pois_multiimp_own, vcov = ~town)
 
 # save results
-marginal_pois_own$order <- c(33, 32, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
+marginal_pois_own$order <- c(32, 33, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
                              23, 22, 24, 19, 30, 29, 31, 4, 18, 20, 11,
                              9, 10, 6, 8, 7, 25, 26, 27)
 marginal_pois_own <- marginal_pois_own[order(marginal_pois_own$order, decreasing = F),]
@@ -551,7 +551,7 @@ for (i in 1:30) {
 median(BIC_pois_own)
 
 
-# 7.3.3 Poisson Reg. with cluster-robust SEs - Tenants ---------------------------
+# 5.3.3 Poisson Reg. with cluster-robust SEs - Tenants ---------------------------
 
 # Fit poisson regression to each imputed data set 
 pois_multiimp_ten <- with(KARE_MI, 
@@ -571,7 +571,7 @@ pois_multiimp_ten <- with(KARE_MI,
 marginal_pois_ten <- avg_slopes(pois_multiimp_ten, vcov = ~town)
 
 # save results
-marginal_pois_ten$order <- c(33, 32, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
+marginal_pois_ten$order <- c(32, 33, 1, 2, 28, 3, 12, 13, 14, 15, 16, 21, 
                              23, 22, 24, 19, 30, 29, 31, 4, 17, 18, 20, 11,
                              9, 10, 6, 8, 7, 25, 26, 27)
 marginal_pois_ten <- marginal_pois_ten[order(marginal_pois_ten$order, decreasing = F),]
@@ -622,7 +622,7 @@ for (i in 1:30) {
 }
 median(BIC_pois_ten)
 
-# 7.3.4 Create table (App. A2) ---------------------------
+# 5.3.4 Create table (App. A2) ---------------------------
 
 stargazer(pois_model, pois_model_own, pois_model_ten,               # use complete case models as model objects as list objects are not supported
           coef = list(b_pois_AME, b_pois_AME_own, b_pois_AME_ten),  # but display coefficients etc. from imputed models 
@@ -635,7 +635,7 @@ stargazer(pois_model, pois_model_own, pois_model_ten,               # use comple
           out = here::here("./output/PoisReg_inck.doc"))
 
 
-# 7.3.5 Create forest plot (Fig.7) ---------------------------
+# 5.3.5 Create forest plot (Fig.7) ---------------------------
 
 # label variables
 marginal_pois_own <- marginal_pois_own %>%
@@ -727,7 +727,7 @@ ggsave(filename = here::here("./output/poisplot.svg"))
 
 
 
-# 7.4 Robustness check: Income / Income Groups ---------------------------
+# 5.4 Robustness check: Income / Income Groups ---------------------------
 
 # load data
 load(here::here("./data/tidy/KARE_imp_richlog.RData"))
@@ -777,11 +777,11 @@ KARE_MI$data$R80a_1 <- relevel(KARE_MI$data$R80a_1, ref = "Rather no/no")
 KARE_MI$data$rich <- relevel(KARE_MI$data$rich, ref = "middle")
 
 
-# 7.4.1 Log Reg: ACs --> Adaptation action yes/no ---------------------------
+# 5.4.1 Log Reg: ACs --> Adaptation action yes/no ---------------------------
 
 # binary outcome --> binary logistic regression
 
-# 7.4.1.1 Logistic Reg with cluster-robust SEs - full sample ---------------------------
+# 5.4.1.1 Logistic Reg with cluster-robust SEs - full sample ---------------------------
 
 # fit logistic regression to each imputed data set 
 glm_multiimp <- with(KARE_MI,
@@ -807,6 +807,9 @@ marginal <- marginal[order(marginal$order, decreasing = F),]
 b_log_rich_AME <- c(NA, marginal$estimate)
 se_log_rich_AME <- c(NA, marginal$std.error)
 p_log_rich_AME <- c(NA, marginal$p.value)
+
+
+print(marginal[order(marginal$order, decreasing = F),], nrows = 40, digits = 4, style = "tinytable") 
 
 
 ### Goodness of fit measures
@@ -881,14 +884,14 @@ ggplot(data = data.frame(x = KARE_data6$town, y = glm_data6$residuals), aes(x = 
 car::vif(glm_multiimp$analyses[[10]]) 
 # GVIF to the power of 1/2df makes the value of the GVIF comparable across 
 # different number of parameters --> 
-# GVIF (1/(2*Df) < 2 for all --> no multicollinearity
+# GVIF (1/(2*Df) < 2.1 for all --> no multicollinearity
 
 
 # 4) Exogeneity 
 # --> all relevant CVs are included in the model
 
 
-# 7.4.1.2 Logistic Reg with cluster-robust SEs - Owners ---------------------------
+# 5.4.1.2 Logistic Reg with cluster-robust SEs - Owners ---------------------------
 
 # fit logistic regression to each imputed data set 
 glm_multiimp_own <- with(KARE_MI,
@@ -935,7 +938,7 @@ for (i in 1:30) {
 median(BIC_log_own)
 
 
-# 7.4.1.3 Logistic Reg with cluster-robust SEs - Tenants ---------------------------
+# 5.4.1.3 Logistic Reg with cluster-robust SEs - Tenants ---------------------------
 
 # fit logistic regression to each imputed data set 
 glm_multiimp_ten <- with(KARE_MI,
@@ -982,7 +985,7 @@ for (i in 1:30) {
 median(BIC_log_ten)
 
 
-# 7.4.1.4 Create table (App. A3) ---------------------------
+# 5.4.1.4 Create table (App. A3) ---------------------------
 
 stargazer(log_rich_model, log_rich_model_own, log_rich_model_ten,               # use complete case models as model objects as list objects are not supported
           coef = list(b_log_rich_AME, b_log_rich_AME_own, b_log_rich_AME_ten),  # but display coefficients etc. from imputed models 
@@ -995,11 +998,11 @@ stargazer(log_rich_model, log_rich_model_own, log_rich_model_ten,               
           out = here::here("./output/LogReg_inclog_rich.doc"))
 
 
-# 7.4.2 Poisson Reg: ACs --> Adaptation Action No. ---------------------------
+# 5.4.2 Poisson Reg: ACs --> Adaptation Action No. ---------------------------
 
 # count data --> poisson regression
 
-# 7.4.2.1 Poisson Reg. with cluster-robust SEs - full sample ---------------------------
+# 5.4.2.1 Poisson Reg. with cluster-robust SEs - full sample ---------------------------
 
 # Fit poisson regression to each imputed data set 
 pois_multiimp <- with(KARE_MI, 
@@ -1070,7 +1073,7 @@ for (i in 1:30) {
 median(BIC_pois_all)
 
 
-# 7.4.2.2 Poisson Reg. with cluster-robust SEs - Owners ---------------------------
+# 5.4.2.2 Poisson Reg. with cluster-robust SEs - Owners ---------------------------
 
 # Fit poisson regression to each imputed data set 
 pois_multiimp_own <- with(KARE_MI, 
@@ -1142,7 +1145,7 @@ for (i in 1:30) {
 median(BIC_pois_own)
 
 
-# 7.4.2.3 Poisson Reg. with cluster-robust SEs - Tenants ---------------------------
+# 5.4.2.3 Poisson Reg. with cluster-robust SEs - Tenants ---------------------------
 
 # Fit poisson regression to each imputed data set 
 pois_multiimp_ten <- with(KARE_MI, 
@@ -1214,7 +1217,7 @@ for (i in 1:30) {
 median(BIC_pois_ten)
 
 
-# 7.4.2.4 Create table (App. A3) ---------------------------
+# 5.4.2.4 Create table (App. A3) ---------------------------
 
 stargazer(pois_rich_model, pois_rich_model_own, pois_rich_model_ten,              # use complete case models as model objects as list objects are not supported
           coef = list(b_pois_rich_AME, b_pois_rich_AME_own, b_pois_rich_AME_ten), # but display coefficients etc. from imputed models
