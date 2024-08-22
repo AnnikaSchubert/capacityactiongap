@@ -283,40 +283,6 @@ KARE$R80a_1 <-  recode_factor(as.numeric(KARE$R80a_1),
 table(KARE$R80a_1, useNA = "always")
 
 
-
-# 3.2.3 Control Variables ---------------------------
-
-### regroup variable as some categories are too small to draw conclusions 
-# housing type
-table(KARE$R69)
-table(as.numeric(KARE$R69))
-KARE$R69 <-  recode_factor(as.numeric(KARE$R69), 
-                           `1` = "Single family home",
-                           `2` = "Duplexe/terraced house",
-                           `3` = "Duplexe/terraced house",
-                           `4` = "Apartment building",
-                           `5` = "Apartment building",
-                           `6` = "Apartment building")
-
-### high correlation between R4 & R5, code into one variable to reduce
-#   multicollinearity in imputation models
-# past experience
-KARE$R4a5 <- "none"
-KARE$R4a5 <- ifelse(KARE$R4 == 1, "experience", KARE$R4a5)
-KARE$R4a5 <- ifelse(KARE$R5 == 1, "damage", KARE$R4a5)
-KARE$R4a5 <- as_factor(KARE$R4a5)
-table(KARE$R4a5)
-
-
-### recode NAs for town into a separate category
-# assumption: people from same towns are more similar (not independent)
-table(KARE$town, useNA = "always")
-# recode 58 respondents who did not answer in a separate category named "noresp"
-KARE$town <- as.character(KARE$town)
-KARE$town <-ifelse(is.na(KARE$town), "noresp", KARE$town) 
-KARE$town <- as_factor(KARE$town)
-
-
 # 3.2.3 Control Variables ---------------------------
 
 ### regroup housing type categories are too small to draw conclusions 
@@ -351,6 +317,7 @@ table(KARE$R4a5)
 ### recode 58 NAs for town into a separate category ("noresp")
 # assumption: people from same towns are more similar (obs not independent)
 table(KARE$town, useNA = "always")
+# recode 58 respondents who did not answer in a separate category named "noresp"
 KARE$town <- as.character(KARE$town)
 KARE$town <-ifelse(is.na(KARE$town), "noresp", KARE$town) 
 KARE$town <- as_factor(KARE$town)
